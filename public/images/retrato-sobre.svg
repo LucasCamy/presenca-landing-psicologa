@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 680" role="img" aria-label="Ilustração demonstrativa de mãos sobre uma mesa de madeira com caderno, xícara e planta">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3EDE5"/><stop offset="1" stop-color="#E7DFD4"/></linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFDF9" stop-opacity="0"/><stop offset=".5" stop-color="#FFFDF9" stop-opacity=".75"/><stop offset="1" stop-color="#FFFDF9" stop-opacity="0"/></linearGradient>
+    <clipPath id="f"><rect width="520" height="680"/></clipPath>
+  </defs>
+  <g clip-path="url(#f)">
+    <rect width="520" height="680" fill="url(#bg)"/>
+    <!-- feixes de luz de janela -->
+    <g transform="rotate(-24 260 340)">
+      <rect x="-40" y="120" width="620" height="46" fill="url(#beam)"/>
+      <rect x="-40" y="210" width="620" height="46" fill="url(#beam)"/>
+      <rect x="-40" y="300" width="620" height="46" fill="url(#beam)"/>
+    </g>
+    <!-- folhas -->
+    <g>
+      <path d="M470 -10 C400 60 420 160 470 200 C520 150 520 40 470 -10Z" fill="#8FA08A"/>
+      <path d="M470 -10 C455 60 455 140 470 200" stroke="#6F8470" stroke-width="2" fill="none"/>
+      <path d="M520 80 C450 110 430 190 450 250 C520 230 560 150 520 80Z" fill="#A8B5A2"/>
+      <path d="M-20 40 C60 40 110 110 100 190 C20 190 -30 120 -20 40Z" fill="#A8B5A2" opacity=".85"/>
+    </g>
+    <!-- mesa de madeira -->
+    <path d="M0 420 L520 380 L520 680 L0 680Z" fill="#C9A17D"/>
+    <path d="M0 470 L520 436 M0 530 L520 500 M0 600 L520 572" stroke="#B88E69" stroke-width="2" opacity=".6"/>
+    <path d="M0 420 L520 380 L520 392 L0 432Z" fill="#D8B592"/>
+    <!-- caderno -->
+    <g transform="rotate(-6 200 520)">
+      <rect x="70" y="440" width="260" height="190" rx="8" fill="#FFFDF9" stroke="#D9D0C6" stroke-width="2"/>
+      <path d="M200 440v190" stroke="#D9D0C6" stroke-width="2"/>
+      <path d="M95 480h85M95 505h85M95 530h85M95 555h60M220 480h85M220 505h85M220 530h60" stroke="#C9BFB3" stroke-width="3" stroke-linecap="round"/>
+      <rect x="60" y="436" width="14" height="198" rx="4" fill="#4F665A"/>
+    </g>
+    <!-- caneta -->
+    <g transform="rotate(18 330 560)"><rect x="290" y="552" width="120" height="9" rx="4" fill="#3E3935"/><rect x="396" y="552" width="14" height="9" rx="3" fill="#C98E76"/></g>
+    <!-- xícara -->
+    <ellipse cx="400" cy="506" rx="62" ry="14" fill="#000" opacity=".08"/>
+    <path d="M348 440h104l-10 62q-3 14-18 14h-48q-15 0-18-14z" fill="#C98E76"/>
+    <ellipse cx="400" cy="440" rx="52" ry="11" fill="#B97D66"/>
+    <ellipse cx="400" cy="441" rx="44" ry="8" fill="#6B4A3C"/>
+    <path d="M452 456q30 2 26 26t-34 22" fill="none" stroke="#C98E76" stroke-width="9" stroke-linecap="round"/>
+    <path d="M385 420q-8-18 4-30M410 420q-8-18 4-30" stroke="#FFFDF9" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>
+    <!-- mão -->
+    <path d="M-10 590 C60 560 120 560 200 585 C225 595 225 620 200 628 C130 650 50 660 -10 650Z" fill="#E8C4AA"/>
+    <path d="M150 585 C185 575 225 580 232 600 C236 616 214 624 188 620" fill="#E8C4AA" stroke="#D5AE93" stroke-width="2"/>
+    <path d="M-10 640 C20 610 60 600 100 604" stroke="#4F665A" stroke-width="40" stroke-linecap="round" fill="none" opacity="0"/>
+    <path d="M-10 600 L70 585 L70 680 L-10 680Z" fill="#4F665A"/>
+  </g>
+</svg>
