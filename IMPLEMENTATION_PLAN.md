@@ -27,3 +27,12 @@ tests/content.test.ts      guarda de conteúdo (frases proibidas, CRP, avisos)
 3. Revisão ética/jurídica (CRP) e aprovação do texto.
 4. Concluir protótipo e mobile no Figma.
 5. Publicar em hospedagem estática (Netlify/Vercel/Cloudflare Pages), com domínio e HTTPS; adicionar `og:image`, `sitemap`/`robots` e, se desejado, analytics com consentimento.
+
+## Atualização: identidade da profissional (aplicando o agent-project-kit)
+1. Inspeção do kit e do projeto; criação de `AGENTS.md`.
+2. Figma: tokens de cor, estilos de título e textos das páginas Foundations/Components (Landing Page pendente por limite do plano).
+3. Conteúdo: dados reais do material de divulgação; pendências visíveis no lugar de dados inventados; `publishBlockers`.
+4. Sistema visual: `src/styles/tokens.css` + `globals.css`; Tailwind restrito a `src` (CSS de 66 KB para 29,6 KB).
+5. Lótus como elemento-assinatura; layouts distintos por seção; timeline animada; headline com máscara.
+6. Acessibilidade: menu com foco preso e scroll travado; formulário sem consentimento obrigatório (aviso + link), foco na mensagem de sucesso; scroll sem listener manual.
+7. Validação em 375–1920 px com o script do kit.

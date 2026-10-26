@@ -9,11 +9,14 @@
     "typecheck": "tsc -b --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:motion": "node scripts/motion-check.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/dancing-script": "^5.3.0",
     "@fontsource-variable/dm-sans": "^5.3.0",
-    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "lenis": "^1.3.27",
     "lucide-react": "^1.52.0",
     "motion": "^14.0.0",
     "react": "^19.3.0",
@@ -29,6 +32,7 @@
     "eslint": "^10.12.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.13.0",
+    "playwright": "^1.64.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.71.1",

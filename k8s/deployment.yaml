@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: presenca-psicologa
+  namespace: landingpages
+  labels:
+    app: presenca-psicologa
+  # Keel: rollout automático quando ghcr.io/.../presenca-landing-psicologa:latest muda de digest.
+  annotations:
+    keel.sh/policy: "force"
+    keel.sh/trigger: "poll"
+    keel.sh/pollSchedule: "@every 1m"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: presenca-psicologa
+  template:
+    metadata:
+      labels:
+        app: presenca-psicologa
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+        runAsGroup: 101
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: web
+          image: ghcr.io/lucascamy/presenca-landing-psicologa:latest
+          # Obrigatório com tag flutuante + Keel (senão o kubelet reutiliza a imagem antiga em cache).
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          # Landing page estática: reserva mínima, teto para picos (padrão do homelab).
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 3
+            failureThreshold: 3
+          # Sistema de arquivos somente leitura: o Nginx unprivileged grava pid e temporários em /tmp.
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Mi

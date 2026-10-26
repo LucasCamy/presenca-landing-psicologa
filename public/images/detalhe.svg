@@ -9,9 +9,9 @@
   <path d="M0 470L600 450M0 530L600 515" stroke="#B88E69" stroke-width="2" opacity=".6"/>
   <ellipse cx="300" cy="438" rx="230" ry="12" fill="#000" opacity=".07"/>
   <!-- livros -->
-  <rect x="150" y="380" width="260" height="52" rx="6" fill="#4F665A"/><rect x="164" y="392" width="232" height="6" fill="#FFFDF9" opacity=".5"/>
-  <rect x="170" y="332" width="230" height="48" rx="6" fill="#C98E76"/><rect x="184" y="344" width="202" height="5" fill="#FFFDF9" opacity=".5"/>
-  <rect x="160" y="290" width="210" height="42" rx="6" fill="#9EAFB5"/><rect x="174" y="300" width="182" height="5" fill="#FFFDF9" opacity=".5"/>
+  <rect x="150" y="380" width="260" height="52" rx="6" fill="#9A5B3A"/><rect x="164" y="392" width="232" height="6" fill="#FFFDF9" opacity=".5"/>
+  <rect x="170" y="332" width="230" height="48" rx="6" fill="#C9906A"/><rect x="184" y="344" width="202" height="5" fill="#FFFDF9" opacity=".5"/>
+  <rect x="160" y="290" width="210" height="42" rx="6" fill="#E6D2C3"/><rect x="174" y="300" width="182" height="5" fill="#FFFDF9" opacity=".5"/>
   <!-- xícara sobre os livros -->
   <path d="M215 232h96l-9 52q-2 6-9 6h-60q-7 0-9-6z" fill="#FFFDF9" stroke="#D9D0C6" stroke-width="2"/>
   <ellipse cx="263" cy="232" rx="48" ry="9" fill="#EEE8E0" stroke="#D9D0C6"/>
@@ -19,11 +19,11 @@
   <path d="M311 242q24 0 20 20t-26 16" fill="none" stroke="#D9D0C6" stroke-width="7" stroke-linecap="round"/>
   <!-- galho -->
   <g transform="translate(430 440)">
-    <path d="M0 0 C20 -90 40 -180 90 -300" stroke="#7D9179" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path d="M18 -80 C60 -90 90 -70 100 -40 C60 -30 30 -50 18 -80Z" fill="#A8B5A2"/>
-    <path d="M36 -150 C-10 -160 -40 -140 -50 -110 C-6 -100 24 -120 36 -150Z" fill="#8FA08A"/>
-    <path d="M60 -220 C110 -230 140 -210 150 -180 C100 -170 70 -190 60 -220Z" fill="#A8B5A2"/>
-    <path d="M78 -280 C40 -300 10 -290 0 -260 C40 -250 68 -260 78 -280Z" fill="#8FA08A"/>
+    <path d="M0 0 C20 -90 40 -180 90 -300" stroke="#A39A74" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M18 -80 C60 -90 90 -70 100 -40 C60 -30 30 -50 18 -80Z" fill="#C9C2A2"/>
+    <path d="M36 -150 C-10 -160 -40 -140 -50 -110 C-6 -100 24 -120 36 -150Z" fill="#B5AC88"/>
+    <path d="M60 -220 C110 -230 140 -210 150 -180 C100 -170 70 -190 60 -220Z" fill="#C9C2A2"/>
+    <path d="M78 -280 C40 -300 10 -290 0 -260 C40 -250 68 -260 78 -280Z" fill="#B5AC88"/>
   </g>
   <rect x="0" y="0" width="600" height="600" fill="none"/>
 </svg>

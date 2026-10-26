@@ -1,37 +1,65 @@
-# Landing page — Helena Martins, Psicóloga (modelo demonstrativo)
+# Presença: landing page de Elainy Karoliny R M Genova, psicóloga clínica
 
-Perfil profissional pessoal e acolhedor, com a direção visual **"Presença e Acolhimento"**.
+Perfil profissional on-line, com identidade baseada no material de divulgação da profissional: branco quente, cobre e pêssego, nome em caixa alta, lótus em traço fino e o @ do Instagram em manuscrito.
 
-> ⚠ **ATENÇÃO — DADOS DEMONSTRATIVOS.** Nome, CRP, contatos (WhatsApp, e-mail, Instagram), textos, horários e imagens são **placeholders** e **devem ser substituídos pela profissional antes da publicação**. Nenhuma informação sobre formação, abordagem, resultados ou certificações foi inventada: o que falta está marcado com `[colchetes]`. Veja [CONTENT_REVIEW.md](CONTENT_REVIEW.md).
+> ⚠ **Versão para apresentação.** Antes de publicar, resolva os itens de `publishBlockers` em `src/content/site.ts`: **CRP**, confirmação do WhatsApp, foto real, aprovação dos textos e formulário real. Veja [CONTENT_REVIEW.md](CONTENT_REVIEW.md). Nenhum dado além dos informados (nome, título, telefone, e-mail, Instagram, atendimento on-line) foi inventado.
 
 ## Stack
-React 19 · TypeScript · Vite · Tailwind CSS v4 · Motion · Lucide React · fontes locais (Fraunces + DM Sans via Fontsource).
+Vite · React 19 · TypeScript strict · Tailwind CSS v4 · Motion · Lucide · fontes self-hosted (Montserrat, DM Sans, Dancing Script).
 
-## Como executar
+## Executar
 ```bash
 npm install
-npm run dev        # desenvolvimento em http://localhost:5173
-npm run build      # build de produção em dist/
-npm run typecheck
-npm run lint
-npm test           # testes de conteúdo (frases proibidas, CRP, avisos)
+npm run dev
+```
+Também existem `npm run build`, `npm run typecheck`, `npm run lint` e `npm test`.
+
+Com o dev server rodando, `npm run check:motion` confere scroll, âncoras e transições no Edge instalado (desktop e celular, com e sem "reduzir movimento"). Para ver as animações numa máquina com "reduzir movimento" ligado, abra `http://localhost:5173/?movimento=1`.
+
+## Editar conteúdo
+- **Tudo** em `src/content/site.ts`: dados, textos, FAQ, imagens, pendências.
+- CRP: troque `crp: 'CRP pendente'` por `'CRP 14/00000'` (formato real) e remova "Número do CRP" de `publishBlockers`.
+- Imagens: substitua os SVGs em `public/images/` por fotos (com autorização de uso de imagem) e ajuste `alt` e `caption` em `images`.
+- Cores e fontes: `src/styles/tokens.css`.
+- Formulário: o envio é **simulado**. Conecte um serviço real em `src/lib/submitContact.ts` e atualize [PRIVACY.md](PRIVACY.md).
+- Para tirar a faixa de aviso: esvazie `publishBlockers` e mude `demoMode` para `false` (o teste impede desligar com pendências).
+
+## Deploy no Cloudlane Homelab (k3s + Keel)
+Segue o [homelab-docs](https://github.com/LucasCamy/homelab-docs) (`agent.md` e guia 06), no mesmo padrão da `vidracaria-landing`.
+
+| Item | Valor |
+|---|---|
+| Imagem | `ghcr.io/lucascamy/presenca-landing-psicologa:latest` (+ `sha-<curto>`), `linux/amd64` |
+| Container | Nginx unprivileged, usuário 101, porta 8080, raiz somente leitura, `/healthz` |
+| Kubernetes | Deployment + Service `presenca-psicologa` no namespace `landingpages` |
+| Porta LoadBalancer | **8212** em `192.168.15.19` (próxima livre do catálogo) |
+| CI | `.github/workflows/deploy.yml`: lint, testes e build; depois publica no GHCR |
+
+**Primeira vez:**
+1. `git push` na `main` → o GitHub Actions publica a imagem.
+2. No GitHub: **Packages** → `presenca-landing-psicologa` → **Package settings** → visibilidade **Public** (para o Keel puxar sem credencial).
+3. No nó k3s (`ssh` na VM 200, com o repositório clonado):
+   ```bash
+   kubectl apply --dry-run=server -f k8s/
+   kubectl apply -f k8s/
+   kubectl -n landingpages rollout status deploy/presenca-psicologa
+   curl -fsS http://192.168.15.19:8212/healthz
+   ```
+4. Cloudflare Zero Trust → **Cloudlane Tunnel** → **Public Hostname**: subdomínio escolhido (ex.: `psicologa.cloudlane.com.br`) → `HTTP` → `192.168.15.19:8212`.
+5. Uptime Kuma: monitor HTTP(s) em `https://<subdomínio>/healthz`, intervalo 60 s.
+6. Registrar a porta 8212 em `04_CATALOGO_DE_APLICACOES_K3S.md` do homelab-docs.
+
+**Depois:** cada push na `main` que passar no lint/testes gera imagem nova, e o Keel faz o rollout em até 1 minuto, sem comando no servidor.
+
+**Testar a imagem localmente:**
+```bash
+docker build --target production -t presenca-landing-psicologa:local .
+docker run --rm -p 127.0.0.1:8212:8080 --read-only --tmpfs /tmp --cap-drop ALL presenca-landing-psicologa:local
 ```
 
-## Como editar o conteúdo
-Tudo fica em **`src/content/site.ts`**: dados da profissional, contatos, links, textos de cada seção, FAQ, horários e imagens. Os componentes só leem esse arquivo.
-
-- Para publicar de verdade: troque os dados, preencha os `[colchetes]` e mude `demoMode` para `false` (remove a faixa de aviso e o texto "dados demonstrativos" do rodapé).
-- **Modo de demonstração (estado atual):** o site está completo, com textos fictícios preenchidos (história, abordagem, FAQ, horários, valores a combinar) e **4 ilustrações próprias em SVG** em `public/images/` (`retrato-hero`, `retrato-sobre`, `consultorio`, `detalhe`), sem direitos de terceiros. Os textos preenchidos são exemplos, **não** informações reais da profissional.
-- Imagens: troque os arquivos em `public/images/` (ou aponte novos caminhos em `images`, em `site.ts`, com o texto alternativo e a legenda). Com `src: null` aparece um placeholder identificado. **A substituir antes de publicar:** as 4 ilustrações por fotografias reais da profissional e do consultório.
-- Cores e fontes: variáveis CSS em `src/index.css` (espelham as variáveis do Figma).
-- Formulário: o envio é **simulado**. Conecte um serviço real em `src/lib/submitContact.ts` e atualize [PRIVACY.md](PRIVACY.md).
-- Política de privacidade: texto-modelo em `privacy` (acessível em `#/privacidade`).
-
-## Figma
-Arquivo: https://www.figma.com/design/vloNwrcmD3NcEq32EWcpSG — veja o estado real e as pendências em [FIGMA_GUIDE.md](FIGMA_GUIDE.md).
-
 ## Documentação
-[DESIGN.md](DESIGN.md) · [FIGMA_GUIDE.md](FIGMA_GUIDE.md) · [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · [CONTENT_REVIEW.md](CONTENT_REVIEW.md) · [PRIVACY.md](PRIVACY.md)
+[AGENTS.md](AGENTS.md) · [DESIGN.md](DESIGN.md) · [FIGMA_GUIDE.md](FIGMA_GUIDE.md) · [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) · [CONTENT_REVIEW.md](CONTENT_REVIEW.md) · [PRIVACY.md](PRIVACY.md)
 
-## Skills de design instaladas
-`.agents/skills` e `.claude/skills` contêm skills de terceiros (taste-skill, ui-ux-pro-max, design-motion-principles). Não fazem parte do site publicado.
+Processo de trabalho baseado no [agent-project-kit](https://github.com/LucasCamy/agent-project-kit) (project-workflow, frontend-figma-playwright, prompt de landing page, conformidade legal).
+
+Figma: https://www.figma.com/design/vloNwrcmD3NcEq32EWcpSG

@@ -1,63 +1,101 @@
-# DESIGN — "Presença e Acolhimento"
+# DESIGN: Presença · Elainy Karoliny
 
-## Direção visual
-Entrar em um consultório tranquilo, claro e organizado. Estética editorial, natural e contemporânea: fundo claro e quente, muito espaço em branco, serifa humanista, linhas finas, textura de papel muito discreta (pontilhado a 3,5% de opacidade), formas orgânicas com moderação (círculos suaves em sálvia e blush), composição levemente assimétrica, arco como moldura de retrato (referência a janela/porta). Sofisticado sem luxo; acolhedor sem ser infantil; profissional sem ser frio.
+## Missão visual
+Traduzir o material de divulgação da profissional (fundo branco, nome em caixa alta cobre, selo "Psicóloga clínica" em pêssego, lótus em traço fino, pílula preta com o @ em manuscrito) em um site calmo, claro e acolhedor. Sensação de consultório iluminado: muito respiro, linhas finas, poucas cores.
 
-**Evitar:** aparência hospitalar, ícones médicos/cérebro, rosa genérico, excesso de elementos flutuantes, sorrisos de banco de imagens, frases motivacionais vazias, visual sombrio.
+**Personalidade:** acolhedora e direta. **Público:** pessoas que procuram acompanhamento psicológico on-line. **Princípios:** clareza antes de efeito; um único acento; nada que pressione ou prometa.
 
-## Paleta (tokens em `src/index.css` e na coleção "Tokens" do Figma)
+## Paleta (tokens em `src/styles/tokens.css`)
 | Token | Hex | Uso |
 |---|---|---|
-| background | #F7F3EE | fundo principal |
-| background-alt | #EEE8E0 | seções alternadas |
-| surface | #FFFDF9 | cartões, formulário |
-| surface-elevated | #FFFFFF | sobreposições |
-| text-primary | #3E3935 | texto principal |
-| text-secondary | #675F58 | texto de apoio (ajustado de #756D66 para AA em fundo alt) |
-| text-muted | #756D66 | só textos grandes/decorativos (4,6:1 no fundo principal) |
-| accent | #4F665A | botões, links (verde profundo) |
-| accent-hover | #3D5247 | hover/pressed |
-| sage / blue-gray / terracotta / highlight | #A8B5A2 / #9EAFB5 / #C98E76 / #D9B9A5 | **decorativos**, nunca para texto pequeno |
-| terracotta-text | #8C4E37 | eyebrows e avisos (ajustado de #9A5B43 para AA em fundo alt) |
-| border | #D9D0C6 | linhas finas |
-| success / error | #3F6B4F / #A5412F | estados (sempre com ícone/texto) |
-| focus-ring | #2F5E8E | anel de foco de 3 px |
+| background | #FFFCFA | fundo principal (branco quente, como no material) |
+| background-alt | #FBF1EA | seções alternadas |
+| surface | #FFFFFF | cartões, formulário |
+| tint | #FCEBDD | selo "Psicóloga clínica", painel de princípios, CTA final (cor do selo original) |
+| text-primary | #2E2622 | texto principal |
+| text-secondary | #6B5A50 | texto de apoio |
+| text-muted | #7C6A60 | placeholders |
+| **accent** | **#9A5B3A** | **acento único**: botões, links, wordmark, eyebrows |
+| accent-hover | #7F4A2E | hover/pressed |
+| display | #B27350 | citação grande (só ≥ 24 px) |
+| peach | #C9906A | **decorativo**: ícones, lótus (cor do nome no material) |
+| peach-soft | #F3D3BE | **decorativo**: lótus grande de fundo |
+| line | #EEDCCF | fios e bordas |
+| ink | #1F1A17 | pílula do Instagram, rodapé, faixa de aviso |
+| success / error | #3F6B4F / #A23B2A | estados, sempre com texto e ícone |
+| focus-ring | #2F5E8E | anel de foco 3 px |
 
-**Contrastes medidos (WCAG):** texto/fundo 10,3:1 · secundário/fundo 5,7:1 · secundário/alt 5,1:1 · botão (claro sobre accent) 6,1:1 · terracotta-text/alt 5,3:1 · erro 6,1:1 · foco 6,1:1. Estados nunca dependem só de cor (ícone ⚠, texto, borda mais espessa).
+**Por que os tons da imagem não são usados como texto:** o cobre do nome (#C9906A) tem 2,73:1 sobre branco e o dos contatos (#D4A07E) 2,30:1, abaixo de AA. Eles ficam como cor de forma/ícone; o texto usa versões mais escuras da mesma família.
+
+**Contraste calculado (WCAG):**
+| Par | Razão |
+|---|---|
+| text-primary / background | 14,51 |
+| text-secondary / background · alt · tint | 6,42 · 5,89 · 5,64 |
+| accent / background · alt · tint | 5,23 · 4,80 · 4,60 |
+| branco / accent (botão) · accent-hover | 5,34 · 7,19 |
+| display / background · alt (texto grande) | 3,76 · 3,46 |
+| background / ink (pílula) | 16,87 |
+| tint / ink (rodapé) | 12,75 |
+| error · success · focus / background | 6,43 · 6,00 · 6,60 |
 
 ## Tipografia
-Títulos: **Fraunces** (serifa humanista, Light/Regular). Texto/UI: **DM Sans**. Sem caixa alta em blocos.
+- **Montserrat** (display): títulos em peso Light/Regular, sentence case; **wordmark em caixa alta** SemiBold com tracking 0,06em, como o nome no material. Acentos (é, ã, ç, õ) conferidos no navegador.
+- **DM Sans** (texto, UI).
+- **Dancing Script**: só na pílula do Instagram (detalhe decorativo, nunca conteúdo essencial).
 
-| Estilo | Fonte | Tamanho/linha |
-|---|---|---|
-| Display | Fraunces Light | 72/78 |
-| H1 | Fraunces Light | 56/62 (mobile 36–40) |
-| H2 | Fraunces | 40/48 (mobile 30) |
-| H3 | Fraunces | 28/36 (cards 20–22) |
-| Body large | DM Sans | 20/32 |
-| Body | DM Sans | 17/28 |
-| Small | DM Sans | 15/24 |
-| Caption | DM Sans Medium | 14/20 |
-| Button | DM Sans SemiBold | 16/24 |
-| Label | DM Sans SemiBold | 14/20 |
+Escala: h1 `clamp(2rem, 4,2vw, 3,5rem)` (máx. 3 linhas de 375 a 1920 px) · h2 `clamp(1,75rem, 3,6vw, 2,5rem)` · h3 18–20 px Medium · corpo 17 px/1,65 · small 15 px · caption 14 px.
 
-## Espaçamento e forma
-Escala 4·8·12·16·24·32·48·64·96·128. Raios 8/16/28/pílula. Conteúdo até 1280 px; gutters 20 px (mobile) / 40 px; seções com 80–112 px de respiro vertical. Fio de 1 px como separador.
+## Espaçamento, raios e sombras
+Escala Tailwind (4 px). Seções com 80–112 px verticais; gutters 20/40 px; conteúdo até 1280 px.
+Raios: badge 6 · campo 12 · painel 20 · moldura 28 · botões e pílulas 999. Sombra única `--shadow-soft`, tingida de cobre.
 
-## Componentes
-Navbar (discreta, ganha borda/blur ao rolar, menu mobile), Logo tipográfico, Button (primário/secundário; Default, Hover, Pressed, Focus, Disabled; com/sem ícone), Text Link, Badge, Section Header, Profile/Service Card, Process Step, FAQ Item (aberto/fechado), WhatsApp CTA (flutuante compacto), Contact Form (padrão, carregando, sucesso, erro), Footer, Image Placeholder, Availability Status. Depoimentos **não** foram criados (exigem autorização).
+## Elemento-assinatura: a lótus
+SVG de traço fino (`src/components/Lotus.tsx`), extraído do material da profissional. Aparece grande e cortada atrás do retrato no hero e no bloco de acolhimento (como no story), pequena como marcador na lista "Pode fazer sentido…" e na citação, e média no CTA final. Desenha o traço uma vez (`pathLength`) ao entrar na tela. Com movimento reduzido, aparece pronta. É decorativa (`aria-hidden`).
 
-## Fotografia
-Luz natural, consultório claro, plantas, livros, madeira, tecidos, janelas, mãos, caderno; retrato com expressão natural. Sem imagens de banco, sofrimento explícito, cérebro, ambiente hospitalar ou fotos sem licença. Sem fotos reais, usar o placeholder identificado em arco ("SUBSTITUIR IMAGEM").
+## Layout por seção (sem repetir família)
+Hero split com lótus · acolhimento centralizado · Sobre mim split com fatos em `dl` · Público em lista editorial de duas colunas com título fixo · Como funciona em linha do tempo · Atendimento em split imagem + lista com ícones · Como eu trabalho em texto + blocos com fios · Princípios em painel pêssego · FAQ em acordeão · Contato com canais + formulário · CTA final em pêssego.
 
 ## Motion
-Contemplativo: aparição suave (opacidade + 12 px, 0,7 s), hover de 250 ms nos botões, FAQ com altura animada (0,35 s), círculo orgânico com deriva lenta de 26 s (só ≥ md), navbar muda de estado no scroll. Sem bounce, parallax, confete ou movimento constante. `MotionConfig reducedMotion="user"` + `prefers-reduced-motion` no CSS. Só `transform`/`opacity`: sem layout shift.
+Peso da skill design-motion-principles para landing page: **Jakub** (polimento sutil, primário) · **Jhey** (lótus e entrada da foto) · **Emil** (menu, formulário, teclado). Tokens em `src/styles/tokens.css` e `src/lib/motion.ts`: `ease.out` (.22, 1, .36, 1), `ease.inOut` (.65, 0, .35, 1), molas sem overshoot (`bounce: 0`), durações 120/180/280/560/900 ms.
+
+| Momento | O que comunica | Como |
+|---|---|---|
+| Rolagem da página | Calma, continuidade | Lenis (`lerp: 0.1`) só com movimento permitido; toque continua nativo |
+| Clique num item do menu | Para onde você vai | Desliza até a seção em 0,6 a 1,4 s (proporcional à distância, `easeInOutCubic`), para **exatamente** sob o menu fixo, atualiza a URL e move o foco para a seção; pode ser interrompido pela roda ou pelo toque |
+| Indicador do menu | Onde você está | Fio cobre desliza entre os links (`layoutId`); trava no destino durante o deslocamento |
+| Menu mobile | Abrir/fechar | Painel com opacidade + 8 px + blur (mola 0,4 s), links em sequência (35 ms); saída 160 ms só com opacidade; véu escuro; ícone ☰↔✕ com troca por blur |
+| Hero | Primeira impressão (rara) | Headline por máscara palavra a palavra; foto com cortina de baixo para cima (`clip-path`, 1,1 s) e assentamento 1,06→1 |
+| Hero ao rolar | Profundidade | **Ligado ao scroll:** lótus sobe 140 px e gira 14°, foto desce 70 px (com a legenda); o texto fica parado e legível |
+| Lótus | Assinatura | Desenho do traço uma vez; **desabrocha com o scroll** (pétalas laterais de ±16°/±34° até 0°) no acolhimento e no fechamento |
+| Frase do acolhimento | Ritmo de leitura | **Ligado ao scroll:** cada palavra vai de 22% a 100% de opacidade conforme a frase sobe |
+| Seções | Entrar em foco | Opacidade + 10 px + blur 4 px → nítido (mola 0,7 s), uma vez; `filter` volta a `none` ao terminar |
+| Fotos (Sobre mim, Atendimento, Como eu trabalho) | Abrir o ambiente | Cortina ao entrar (1,1 s; o consultório abre da esquerda); **ligado ao scroll:** a imagem se aproxima de 1,08 para 1 e desliza ±4% |
+| Como funciona | Sequência | **Ligado ao scroll:** a linha avança com a rolagem e cada etapa acende quando é alcançada (círculo se preenche, texto de 40% para 100%) |
+| Princípios | Chegada | **Ligado ao scroll:** o painel emerge de 94% para 100% e sobe 48 px |
+| Barra de leitura | Quanto falta | Fio pêssego de 2 px sob o menu, proporcional à rolagem (continua com movimento reduzido: é orientação) |
+| FAQ | Abrir/fechar | Altura + opacidade (0,38 s na entrada, 0,26 s na saída); "+" vira "−" por transição CSS interrompível |
+| Troca de página (privacidade) | Mudança de lugar | Saída 150 ms; entrada 380 ms com blur, sem deslocamento |
+| Botões | Resposta ao toque | `scale(0.98)` ao pressionar (120 ms) |
+| WhatsApp flutuante | Aparecer/sumir | Entrada 320 ms; saída 180 ms e menor |
+
+**Deliberadamente sem animação:** qualquer ação iniciada pelo teclado (Enter em link, FAQ, menu), o skip link e loops (não há pulsos nem movimento contínuo).
+
+**Movimento reduzido:** sem Lenis (rolagem nativa, âncoras saltam), sem deslocamentos, sem cortina, sem desenho da lótus e **sem nenhum efeito ligado ao scroll** (frase inteira, linha do tempo completa, lótus aberta; `useMotionAllowed` em cada componente, porque valores do `useTransform` não são desligados pelo `MotionConfig`); `MotionConfig reducedMotion="user"` + `useReducedMotionConfig` + regra CSS. Para demonstrar numa máquina com "reduzir movimento" ligado, use `?movimento=1`.
+
+**Validação:** `npm run check:motion` (Playwright + Edge) roda desktop e celular com as duas preferências: 62 verificações (deslize ou salto, posição sob o menu, foco, URL, indicador, teclado, menu, volta da privacidade, frase, linha do tempo, lótus, overflow, console).
+
+## Estados
+Botões: default, hover, active, focus (anel azul), disabled. Campos: hover, focus, inválido (borda 2 px + ícone + texto com `role="alert"`). Formulário: carregando (mesma largura, desabilitado), sucesso (foco movido para a mensagem), erro de envio (`role="alert"`). Pendências: itálico em cor secundária com "(pendente)".
 
 ## Responsividade
-Testado em 360, 768, 1024 e 1440 px (sem overflow horizontal). Mobile: hero em coluna, CTAs em largura total, menu funcional, accordions com área de toque ≥ 56 px, campos ≥ 48 px, WhatsApp como botão circular compacto que some na seção de contato, decorações ocultas.
+Conferido em 375, 390, 768, 1024, 1280, 1440 e 1920 px sem overflow. A timeline vira vertical no celular. O menu mobile prende o foco, trava o scroll e fecha com Esc. O botão do WhatsApp some no hero, no contato e no rodapé.
 
 ## Acessibilidade
-HTML semântico, um `h1`, hierarquia h2/h3, link "Pular para o conteúdo", `aria-expanded`/`aria-controls` em menu e FAQ, `aria-label` em botões de ícone, labels em todos os campos, erros com `aria-invalid` + `aria-describedby` e foco no primeiro campo inválido, foco visível, foco movido ao primeiro link ao abrir o menu e devolvido ao botão no Esc.
+Um `h1`, skip link, foco visível global, `aria-expanded/controls` no menu e no FAQ, labels em todos os campos, alvos ≥ 44 px (exceto link dentro de frase), sem dependência só de cor.
 
-## Regras de conteúdo
-Sem promessa de resultado, diagnóstico, urgência, escassez, promoções, comparações ou depoimentos sem autorização. Linguagem: "pode fazer sentido buscar apoio quando…". Ver [CONTENT_REVIEW.md](CONTENT_REVIEW.md).
+## Do / Don't
+- ✅ Um acento cobre; pêssego só decorativo; lótus como assinatura.
+- ✅ Pendências visíveis em vez de dados inventados.
+- ❌ Travessão longo em texto visível; promessas, urgência, diagnóstico; eyebrow em toda seção (há 3 em 11 seções).
+- ❌ Ícones médicos, cérebro, imagens de banco.

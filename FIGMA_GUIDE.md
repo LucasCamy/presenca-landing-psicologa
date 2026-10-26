@@ -2,7 +2,18 @@
 
 **Arquivo:** https://www.figma.com/design/vloNwrcmD3NcEq32EWcpSG ("Helena Martins — Landing Page (Presença e Acolhimento)"), criado via Figma MCP na conta lucascamy74@gmail.com, plano Starter.
 
-## Estado real (honesto)
+## Atualização: identidade da Elainy Karoliny
+| Item | Estado |
+|---|---|
+| Variáveis de cor da coleção **Tokens** trocadas para a paleta cobre/pêssego (16 variáveis) | ✅ |
+| Estilos Type/Display, H1, H2, H3 trocados para **Montserrat** | ✅ |
+| Textos com nome, CRP, e-mail e Instagram atualizados nas páginas Foundations (3) e Components (9) | ✅ |
+| Textos escritos direto nos frames da página **Landing Page** (ex.: "Prazer, sou a Helena.", eyebrow do hero) | ❌ não atualizados: limite de chamadas do Starter atingido |
+| Lótus (elemento-assinatura), pílula do Instagram, timeline e novos layouts de seção | ❌ só no código; precisam ser desenhados no Figma |
+
+Os nomes das variáveis continuam os antigos (`color/sage`, `color/terracotta`…) para não quebrar vínculos; o mapeamento para os tokens do código está em DESIGN.md. Para concluir: trocar os textos restantes da página Landing Page com Localizar e substituir (Ctrl+Shift+F no Figma) e redesenhar as seções conforme DESIGN.md.
+
+## Estado anterior
 | Item | Estado |
 |---|---|
 | Arquivo criado e editável | ✅ |

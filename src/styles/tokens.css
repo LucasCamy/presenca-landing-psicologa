@@ -1,0 +1,75 @@
+/*
+ * Tokens: identidade da Elainy Karoliny (base: material de divulgação).
+ * Pêssego e cobre claro são DECORATIVOS (formas, lótus, títulos ≥ 24px).
+ * Texto pequeno e botões usam os cobres escuros, com contraste AA calculado (ver DESIGN.md).
+ */
+:root {
+  /* superfícies */
+  --background: #fffcfa;
+  --background-alt: #fbf1ea;
+  --surface: #ffffff;
+  --tint: #fcebdd;
+  /* texto */
+  --text-primary: #2e2622;
+  --text-secondary: #6b5a50;
+  --text-muted: #7c6a60;
+  /* acento único: cobre */
+  --accent: #9a5b3a;
+  --accent-hover: #7f4a2e;
+  --accent-on: #ffffff;
+  --display: #b27350; /* só para texto ≥ 24px (3,76:1) */
+  /* decorativos */
+  --peach: #c9906a;
+  --peach-soft: #f3d3be;
+  --line: #eedccf;
+  /* tinta: pílula do Instagram e rodapé */
+  --ink: #1f1a17;
+  /* estados */
+  --success: #3f6b4f;
+  --error: #a23b2a;
+  --focus-ring: #2f5e8e;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 280ms;
+  --dur-4: 560ms;
+  --dur-5: 900ms;
+
+  /* sombra tingida com o fundo */
+  --shadow-soft: 0 18px 40px -24px rgba(154, 91, 58, 0.35);
+}
+
+@theme inline {
+  --color-bg: var(--background);
+  --color-bg-alt: var(--background-alt);
+  --color-surface: var(--surface);
+  --color-tint: var(--tint);
+  --color-ink: var(--text-primary);
+  --color-ink-2: var(--text-secondary);
+  --color-ink-3: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-on: var(--accent-on);
+  --color-display: var(--display);
+  --color-peach: var(--peach);
+  --color-peach-soft: var(--peach-soft);
+  --color-line: var(--line);
+  --color-night: var(--ink);
+  --color-ok: var(--success);
+  --color-danger: var(--error);
+
+  --font-display: 'Montserrat Variable', system-ui, sans-serif;
+  --font-sans: 'DM Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-script: 'Dancing Script Variable', cursive;
+
+  --radius-badge: 6px;
+  --radius-control: 999px;
+  --radius-field: 12px;
+  --radius-panel: 20px;
+  --radius-frame: 28px;
+
+  --shadow-soft: var(--shadow-soft);
+}

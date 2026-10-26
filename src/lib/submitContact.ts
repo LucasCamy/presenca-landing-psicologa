@@ -3,14 +3,13 @@ export interface ContactPayload {
   email: string
   preference: string
   message: string
-  consent: boolean
 }
 
 /**
  * ⚠ SIMULAÇÃO. Nenhum dado sai do navegador.
  * Antes de publicar, substitua o corpo desta função por uma chamada real
- * (ex.: serviço de formulários, função serverless ou API própria, sempre via HTTPS)
- * e atualize PRIVACY.md com o provedor, a retenção e o responsável pelos dados.
+ * (serviço de formulários, função serverless ou API própria, sempre via HTTPS)
+ * e atualize PRIVACY.md com o provedor, a retenção e a responsável pelos dados.
  */
 export async function submitContact(payload: ContactPayload): Promise<void> {
   void payload

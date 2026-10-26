@@ -1,30 +1,32 @@
-import { demoMode, emergencyNotice, footer, professional } from '../content/site'
+import { demoMode, emergencyNotice, footer, phoneUrl, professional } from '../content/site'
+
+const linkClass = 'inline-flex min-h-11 items-center text-tint no-underline hover:underline underline-offset-4'
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-bg">
+    <footer className="bg-night text-tint">
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 py-14 md:px-10">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
           <div className="flex flex-col gap-2">
-            <p className="font-serif text-2xl">{professional.fullName}</p>
+            <p className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-peach-soft">{professional.fullName}</p>
             <p>{professional.title} · {professional.crp}</p>
-            <p className="text-sm opacity-90">{professional.modality} · {professional.location}</p>
+            <p className="text-sm">{professional.modality}</p>
           </div>
           <nav aria-label="Rodapé">
-            <ul className="m-0 flex list-none flex-col gap-2 p-0">
+            <ul className="m-0 flex list-none flex-col p-0">
               {footer.links.map((l) => (
-                <li key={l.href}><a href={l.href} className="inline-block py-2 text-bg underline-offset-4 hover:underline">{l.label}</a></li>
+                <li key={l.href}><a href={l.href} className={linkClass}>{l.label}</a></li>
               ))}
             </ul>
           </nav>
-          <ul className="m-0 flex list-none flex-col gap-2 p-0">
-            <li><a href={`mailto:${professional.email}`} className="inline-block py-2 text-bg underline-offset-4 hover:underline">{professional.email}</a></li>
-            <li className="py-2">WhatsApp: {professional.whatsappDisplay}</li>
-            <li><a href={professional.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-block py-2 text-bg underline-offset-4 hover:underline">Instagram {professional.instagramHandle}</a></li>
+          <ul className="m-0 flex list-none flex-col p-0">
+            <li><a href={phoneUrl} className={linkClass}>{professional.phoneDisplay}</a></li>
+            <li><a href={`mailto:${professional.email}`} className={`${linkClass} break-all`}>{professional.email}</a></li>
+            <li><a href={professional.instagramUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>Instagram {professional.instagramHandle}</a></li>
           </ul>
         </div>
-        <p role="note" className="max-w-3xl border-t border-bg/25 pt-6 text-sm">{emergencyNotice}</p>
-        <p className="text-sm opacity-90">
+        <p role="note" className="max-w-3xl border-t border-tint/20 pt-6 text-sm">{emergencyNotice}</p>
+        <p className="text-sm">
           {footer.copyright}
           {demoMode && <> {footer.demoNotice}</>}
         </p>

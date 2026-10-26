@@ -1,37 +1,49 @@
 /**
  * ÚNICA FONTE DE CONTEÚDO DO SITE.
  *
- * ⚠ TODOS os dados abaixo são DEMONSTRATIVOS (placeholders). Nome, CRP, contatos,
- * textos e imagens precisam ser substituídos e revisados pela profissional antes
- * da publicação. Veja CONTENT_REVIEW.md.
+ * Dados da profissional retirados do material de divulgação fornecido (story do Instagram):
+ * nome, título, telefone, e-mail, Instagram e modalidade.
  *
- * Itens entre [colchetes] são lacunas que a profissional deve preencher.
- * Quando `demoMode` for false, o aviso de dados demonstrativos some do site.
+ * ⚠ Nada além disso foi informado. CRP, formação, abordagem, valores, duração e regras de
+ * cancelamento NÃO foram inventados: ficam como pendência visível (`pending`) ou como texto que
+ * apenas diz que o assunto é combinado com a profissional. Enquanto houver itens em
+ * `publishBlockers`, o site não deve ser publicado (veja CONTENT_REVIEW.md).
  */
 
+/** Exibe a faixa de "versão para apresentação". Desligue só quando `publishBlockers` estiver vazio. */
 export const demoMode = true
 
+/** Marcador de pendência visível. Mantém o site legível e deixa claro o que falta. */
+export const pending = (label: string) => `${label} (pendente)`
+
 export const professional = {
-  fullName: 'Helena Martins',
-  title: 'Psicóloga',
-  crp: 'CRP 00/00000',
-  approach: 'Psicologia baseada em evidências',
+  fullName: 'Elainy Karoliny R M Genova',
+  shortName: 'Elainy Karoliny',
+  firstName: 'Elainy',
+  title: 'Psicóloga clínica',
+  /** ⚠ Obrigatório pelas regras de publicidade profissional. Informe no formato "CRP 14/00000". */
+  crp: 'CRP pendente',
   modality: 'Atendimento on-line',
-  location: 'Campo Grande - MS e atendimento on-line',
-  audience: 'Adultos e jovens adultos',
-  instagramHandle: '@helena.psicologia',
-  instagramUrl: 'https://www.instagram.com/helena.psicologia/',
-  /** Somente dígitos, com DDI+DDD. Número demonstrativo. */
-  whatsappNumber: '5567900000000',
-  whatsappDisplay: '(67) 90000-0000',
-  whatsappMessage: 'Olá, Helena! Gostaria de saber mais sobre o atendimento.',
-  email: 'contato@helenamartins.com.br',
-  preferredContactHours: 'segunda a sexta, das 9h às 18h',
+  phoneDisplay: '(67) 99962-2351',
+  /** Somente dígitos, com DDI+DDD. ⚠ Confirmar se este número também é WhatsApp. */
+  whatsappNumber: '5567999622351',
+  whatsappMessage: 'Olá, Elainy! Gostaria de saber mais sobre o atendimento.',
+  email: 'psielainykaroliny@gmail.com',
+  instagramHandle: '@psielainykaroliny',
+  instagramUrl: 'https://www.instagram.com/psielainykaroliny/',
 } as const
 
-export const whatsappUrl = `https://wa.me/${professional.whatsappNumber}?text=${encodeURIComponent(
-  professional.whatsappMessage,
-)}`
+/** Itens que impedem a publicação. Esvazie esta lista à medida que a profissional confirmar. */
+export const publishBlockers = [
+  'Número do CRP',
+  'Confirmação de que o telefone (67) 99962-2351 atende pelo WhatsApp',
+  'Fotografia real da profissional (as imagens atuais são ilustrações)',
+  'Revisão e aprovação de todos os textos pela profissional',
+  'Serviço real para o formulário de contato e revisão da política de privacidade',
+] as const
+
+export const whatsappUrl = `https://wa.me/${professional.whatsappNumber}?text=${encodeURIComponent(professional.whatsappMessage)}`
+export const phoneUrl = `tel:+${professional.whatsappNumber}`
 
 export const nav = {
   links: [
@@ -44,32 +56,33 @@ export const nav = {
   cta: { label: 'Agendar conversa', href: '#contato' },
 } as const
 
-/** Imagens: `null` mostra um placeholder identificado. Coloque arquivos em /public/images. */
 export interface SiteImage {
   src: string | null
   alt: string
-  /** Legenda visível; remova quando usar fotografia real. */
   caption?: string
 }
 
 /**
- * ⚠ Ilustrações DEMONSTRATIVAS (SVG próprias, sem direitos de terceiros).
- * Substitua por fotografias reais da profissional/consultório, ou defina `src: null` para ver o placeholder.
+ * Ilustrações SVG próprias (sem direitos de terceiros). NÃO são retratos da profissional.
+ * Troque por fotografias reais com autorização de uso de imagem. `src: null` mostra placeholder.
  */
 export const images: Record<'portraitHero' | 'portraitAbout' | 'office' | 'still', SiteImage> = {
-  portraitHero: { src: '/images/retrato-hero.svg', alt: 'Ilustração de uma psicóloga em seu consultório, com luz natural entrando pela janela' },
-  portraitAbout: { src: '/images/retrato-sobre.svg', alt: 'Ilustração de mãos sobre uma mesa de madeira, com caderno, xícara e folhas de uma planta' },
-  office: { src: '/images/consultorio.svg', alt: 'Ilustração de um consultório claro, com poltrona, estante, planta e janela', caption: 'Ilustração demonstrativa do ambiente de atendimento.' },
+  portraitHero: {
+    src: '/images/retrato-hero.svg',
+    alt: 'Ilustração de uma psicóloga em um consultório iluminado por luz natural',
+    caption: 'Ilustração. A fotografia da profissional entra aqui.',
+  },
+  portraitAbout: { src: '/images/retrato-sobre.svg', alt: 'Ilustração de mãos sobre uma mesa de madeira, com caderno, xícara e folhas' },
+  office: { src: '/images/consultorio.svg', alt: 'Ilustração de um ambiente claro e acolhedor, com poltrona, estante, planta e janela' },
   still: { src: '/images/detalhe.svg', alt: 'Ilustração de livros empilhados, uma xícara e um galho com folhas sob luz natural' },
 }
 
 export const hero = {
-  eyebrow: `${professional.fullName} · ${professional.title} · ${professional.crp}`,
-  headline: 'Um espaço para olhar para o que você está vivendo com mais cuidado.',
-  intro: `Sou psicóloga e atendo ${professional.audience.toLowerCase()}, com uma prática baseada em evidências. Aqui você conhece meu trabalho e pode entrar em contato, no seu tempo.`,
+  badge: professional.title,
+  headline: 'Você não precisa organizar tudo antes de pedir ajuda.',
+  intro: `Sou ${professional.firstName}, psicóloga clínica. Atendo on-line, em um espaço de escuta, reflexão e cuidado com a sua história.`,
   primaryCta: { label: 'Conheça meu trabalho', href: '#sobre' },
   secondaryCta: { label: 'Entrar em contato', href: '#contato' },
-  chips: [professional.modality, professional.location],
 } as const
 
 export const welcome = {
@@ -79,25 +92,24 @@ export const welcome = {
 
 export const about = {
   eyebrow: 'Sobre mim',
-  title: 'Prazer, sou a Helena.',
+  title: `Prazer, sou a ${professional.firstName}.`,
   story: [
-    'Sempre me interessei pela forma como as pessoas contam a própria história e pelo tempo que cada uma precisa para compreendê-la. Foi essa curiosidade, somada ao respeito por cada trajetória, que me aproximou da Psicologia.',
-    'Entendo o cuidado como uma construção feita a dois: escuto com atenção, explico como o processo funciona e ajusto o caminho junto com você.',
-    `Atendo ${professional.audience.toLowerCase()} de forma on-line, em um ritmo respeitoso e com clareza sobre cada etapa do processo.`,
+    'Acredito que cada pessoa chega à terapia com uma história própria, e que compreendê-la leva o tempo que for necessário.',
+    'Meu trabalho é oferecer uma escuta atenta e explicar com clareza como o processo funciona, para que você se sinta à vontade em cada etapa.',
   ],
+  storyNote: 'Texto de apresentação para revisão da profissional.',
   facts: [
     { label: 'Registro profissional', value: `${professional.title} · ${professional.crp}` },
-    { label: 'Formação', value: 'Graduação em Psicologia (dado demonstrativo)' },
-    { label: 'Abordagem', value: professional.approach },
-    { label: 'Forma de trabalho', value: `${professional.modality} · individual` },
+    { label: 'Modalidade', value: professional.modality },
+    { label: 'Formação e abordagem', value: pending('A informar') },
+    { label: 'Contato', value: professional.phoneDisplay },
   ],
-  link: { label: 'Conheça mais sobre meu trabalho', href: '#abordagem' },
+  link: { label: 'Como funciona o atendimento', href: '#como-funciona' },
 } as const
 
 export const audience = {
-  eyebrow: 'Para quem é o atendimento',
   title: 'Pode fazer sentido buscar apoio quando…',
-  intro: 'Pessoas que estão vivendo momentos como os abaixo costumam procurar acompanhamento. A avaliação é construída em conjunto durante o processo.',
+  intro: 'Pessoas que estão vivendo momentos como estes costumam procurar acompanhamento. A compreensão de cada situação é construída em conjunto, durante o processo.',
   items: [
     { title: 'Mudanças importantes na vida', text: 'Novas fases que pedem tempo para serem compreendidas.' },
     { title: 'Dificuldades nos relacionamentos', text: 'Padrões que se repetem com familiares, amigos ou parceiros.' },
@@ -113,42 +125,39 @@ export const audience = {
 export const process = {
   eyebrow: 'Como funciona',
   title: 'Um começo sem pressa',
-  intro: 'Quatro passos simples. Não há fórmula nem prazo fixo: cada processo é individual.',
+  intro: 'Quatro momentos simples. Não há fórmula nem prazo fixo: cada processo é individual.',
   steps: [
-    { title: 'Primeiro contato', text: 'Você pode enviar uma mensagem para verificar horários e tirar dúvidas iniciais.' },
-    { title: 'Conversa inicial', text: 'Na conversa inicial, falamos sobre o que trouxe você até aqui e avaliamos se o formato faz sentido.' },
+    { title: 'Primeiro contato', text: 'Você envia uma mensagem para verificar horários e tirar dúvidas iniciais.' },
+    { title: 'Conversa inicial', text: 'Falamos sobre o que trouxe você até aqui e avaliamos juntas(os) se o formato faz sentido.' },
     { title: 'Construção do processo', text: 'Caso exista alinhamento, combinamos frequência, formato e próximos passos.' },
-    { title: 'Acompanhamento contínuo', text: 'O processo é acompanhado de forma individual, respeitando seu momento e seus objetivos.' },
+    { title: 'Acompanhamento contínuo', text: 'O processo segue de forma individual, respeitando seu momento e seus objetivos.' },
   ],
 } as const
 
 export const modality = {
-  eyebrow: 'Atendimento',
-  title: 'Como e onde acontece',
-  notice: 'As informações de atendimento devem ser ajustadas pela profissional antes da publicação.',
-  cards: [
-    { title: 'Atendimento on-line', text: 'Sessões por videochamada, de onde você estiver. Plataforma de videochamada combinada antes da primeira sessão.' },
-    { title: 'Presencial (se aplicável)', text: 'Campo Grande - MS. Consultório em região central, com endereço informado após o primeiro contato.' },
-    { title: 'Horários', text: 'Segunda a sexta, entre 9h e 19h. Os horários são combinados individualmente.' },
-    { title: 'Orientações para o on-line', text: 'Escolha um lugar reservado, com internet estável e fones de ouvido, se possível.' },
+  title: 'Atendimento on-line, de onde você estiver',
+  intro: 'As sessões acontecem por videochamada. Você só precisa de um lugar reservado e de uma conexão estável.',
+  items: [
+    { title: 'Por videochamada', text: 'A plataforma e o link são combinados antes da primeira sessão.' },
+    { title: 'Horários combinados', text: 'Os horários são definidos individualmente, conforme a agenda disponível.' },
+    { title: 'Um lugar só seu', text: 'Escolha um ambiente reservado; fones de ouvido ajudam na privacidade.' },
+    { title: 'Primeiro passo', text: `Escreva para ${professional.phoneDisplay} ou ${professional.email}.` },
   ],
 } as const
 
 export const approach = {
-  eyebrow: 'Abordagem',
-  title: professional.approach,
-  intro: 'Trabalho com uma prática que busca apoio em pesquisas e métodos reconhecidos da Psicologia, sempre adaptados à história e ao momento de cada pessoa. Procuro explicar o que estamos fazendo e por quê, sem termos técnicos desnecessários.',
+  title: 'Como eu trabalho',
+  intro: 'A terapia é uma relação construída a dois. Explico o que estamos fazendo e por quê, sem termos técnicos desnecessários, e ajustamos o caminho juntas(os).',
+  approachNote: pending('Abordagem teórica: a informar pela profissional'),
   blocks: [
-    { title: 'Como aparece no atendimento', text: 'Conversamos sobre o que importa para você e combinamos, passo a passo, como vamos trabalhar. Os encontros têm espaço para escuta, reflexão e, quando fizer sentido, estratégias práticas para o dia a dia.' },
-    { title: 'O que esperar da relação terapêutica', text: 'Escuta, respeito e clareza sobre o processo, em uma relação construída em conjunto.' },
-    { title: 'O que não é uma promessa', text: 'A terapia não garante resultados específicos nem prazos. É um processo construído com você, no seu ritmo.' },
+    { title: 'O que esperar das sessões', text: 'Escuta atenta, espaço para reflexão e clareza sobre cada etapa do processo.' },
+    { title: 'O que esperar da relação', text: 'Respeito ao seu ritmo, sem julgamentos, com combinados claros desde o início.' },
+    { title: 'O que não é uma promessa', text: 'A terapia não garante resultados específicos nem prazos. É um processo construído com você.' },
   ],
 } as const
 
 export const principles = {
-  eyebrow: 'Princípios',
   title: 'Princípios que orientam meu trabalho',
-  intro: 'Exemplos editáveis. Descrevem uma postura de trabalho, não uma comparação com outros profissionais.',
   items: [
     { title: 'Escuta sem julgamentos', text: 'Um espaço para falar com liberdade.' },
     { title: 'Respeito ao ritmo', text: 'Cada pessoa tem o seu tempo.' },
@@ -163,19 +172,18 @@ export const emergencyNotice =
   'Este site não substitui atendimento de emergência. Em uma situação de risco imediato, procure os serviços de emergência da sua região ou um serviço de saúde adequado.'
 
 export const faq = {
-  eyebrow: 'Dúvidas',
   title: 'Perguntas frequentes',
-  intro: 'Respostas editáveis. A profissional deve revisar cada uma antes da publicação.',
+  intro: 'Se a sua dúvida não estiver aqui, é só escrever.',
   items: [
-    { q: 'Como funciona o primeiro contato?', a: 'Você pode enviar uma mensagem pelo WhatsApp, e-mail ou formulário. Respondo para combinar uma conversa inicial, sem compromisso.' },
-    { q: 'O atendimento é on-line ou presencial?', a: 'O atendimento é on-line, por videochamada. Em alguns casos, podemos conversar sobre a possibilidade de encontros presenciais em Campo Grande - MS.' },
-    { q: 'Quanto dura uma sessão?', a: 'As sessões costumam durar cerca de 50 minutos. Combinamos a duração e a frequência juntas(os) na conversa inicial.' },
-    { q: 'Como são definidos os horários?', a: 'Os horários são combinados individualmente, conforme a disponibilidade de cada pessoa e da agenda.' },
-    { q: 'O que acontece na primeira conversa?', a: 'Conversamos sobre o que trouxe você até aqui, tiramos dúvidas e avaliamos juntas(os) se o formato faz sentido. Você não precisa chegar com tudo organizado.' },
+    { q: 'Como funciona o primeiro contato?', a: 'Você pode enviar uma mensagem pelo WhatsApp, e-mail ou formulário. A resposta vem com as informações para combinarmos uma conversa inicial.' },
+    { q: 'O atendimento é on-line ou presencial?', a: 'O atendimento é on-line, por videochamada.' },
+    { q: 'Quanto dura uma sessão?', a: 'A duração e a frequência das sessões são explicadas e combinadas na conversa inicial.' },
+    { q: 'Como são definidos os horários?', a: 'Os horários são combinados individualmente, conforme a sua disponibilidade e a agenda.' },
+    { q: 'O que acontece na primeira conversa?', a: 'Conversamos sobre o que trouxe você até aqui, tiramos dúvidas e avaliamos se o formato faz sentido. Você não precisa chegar com tudo organizado.' },
     { q: 'Posso tirar dúvidas antes de agendar?', a: 'Sim. Você pode escrever a qualquer momento para perguntar sobre o atendimento.' },
-    { q: 'Como funciona o cancelamento?', a: 'Pedimos aviso com pelo menos 24 horas de antecedência para remarcar ou cancelar. Os detalhes são combinados no início do acompanhamento.' },
-    { q: 'O atendimento é sigiloso?', a: 'O sigilo é um princípio da prática profissional da Psicologia.' },
-    { q: 'Como funciona o pagamento?', a: 'Os valores, as formas de pagamento e a periodicidade são informados na conversa inicial, de forma transparente, antes de qualquer compromisso.' },
+    { q: 'Como funciona o cancelamento?', a: 'As regras de remarcação e cancelamento são apresentadas no início do acompanhamento, antes de qualquer compromisso.' },
+    { q: 'O atendimento é sigiloso?', a: 'O sigilo é um princípio da prática profissional da Psicologia. Os detalhes de como as informações são tratadas são conversados no início do atendimento.' },
+    { q: 'Como funciona o pagamento?', a: 'Valores e formas de pagamento são informados com transparência no primeiro contato.' },
     { q: 'O que fazer em uma situação de emergência?', a: emergencyNotice },
   ],
 } as const
@@ -187,12 +195,10 @@ export const contact = {
   whatsappLabel: 'Conversar pelo WhatsApp',
   sensitiveNotice:
     'Por segurança, evite enviar informações sensíveis ou detalhes clínicos neste formulário. Esses assuntos podem ser conversados em um canal apropriado.',
+  privacyNotice: 'Seus dados são usados apenas para responder a este contato.',
   contactPreferences: ['WhatsApp', 'E-mail'],
-  /**
-   * ⚠ O envio do formulário é SIMULADO. Para publicar, conecte um serviço real
-   * em src/lib/submitContact.ts (veja PRIVACY.md).
-   */
-  success: 'Mensagem recebida (simulação). Neste modelo o envio é apenas visual.',
+  /** ⚠ Envio SIMULADO. Conecte um serviço real em src/lib/submitContact.ts. */
+  success: 'Obrigada pela mensagem. Neste modelo o envio é simulado: para falar agora, use o WhatsApp ou o e-mail.',
 } as const
 
 export const finalCta = {
@@ -203,26 +209,24 @@ export const finalCta = {
 } as const
 
 export const footer = {
-  links: [
-    ...nav.links,
-    { label: 'Política de privacidade', href: '#/privacidade' },
-  ],
+  links: [...nav.links, { label: 'Política de privacidade', href: '#/privacidade' }],
   copyright: `© ${new Date().getFullYear()} ${professional.fullName}. Todos os direitos reservados.`,
-  demoNotice: 'Dados demonstrativos — substituir antes da publicação.',
+  demoNotice: 'Versão para apresentação: CRP e alguns textos aguardam confirmação da profissional.',
 } as const
 
 export const privacy = {
   title: 'Política de privacidade',
-  reviewNotice:
-    'Texto-modelo editável. Deve ser revisado pela profissional (e por assessoria jurídica) antes da publicação.',
+  reviewNotice: 'Minuta para revisão da profissional e de assessoria jurídica antes da publicação.',
+  updatedAt: pending('Data de atualização'),
   sections: [
+    { title: 'Quem é a responsável', text: `${professional.fullName}, ${professional.title.toLowerCase()} (${professional.crp}). Contato: ${professional.email}.` },
     { title: 'Quais dados são coletados', text: 'O formulário de contato coleta apenas nome, e-mail, preferência de canal e uma mensagem curta. Não pedimos informações clínicas, diagnósticos ou histórico de saúde.' },
-    { title: 'Para que usamos', text: 'Os dados são usados somente para responder ao seu contato e combinar uma conversa inicial.' },
-    { title: 'Consentimento', text: 'O envio do formulário depende do seu consentimento explícito, marcado antes do envio.' },
-    { title: 'Retenção', text: 'Mensagens de contato que não resultarem em atendimento são excluídas em até 90 dias (prazo demonstrativo, a ser confirmado pela profissional).' },
-    { title: 'Cookies e analytics', text: 'Este modelo não usa cookies de rastreamento nem ferramentas de análise. [Atualizar se forem adicionados.]' },
-    { title: 'Seus direitos', text: 'Você pode pedir acesso, correção ou exclusão dos seus dados pelo e-mail de contato.' },
-    { title: 'Canais seguros', text: 'Evite enviar informações sensíveis por formulário, e-mail ou redes sociais. Detalhes clínicos devem ser tratados em canal apropriado combinado com a profissional.' },
+    { title: 'Para que usamos', text: 'Os dados são usados somente para responder ao seu contato e combinar uma conversa inicial, a seu pedido.' },
+    { title: 'Compartilhamento', text: 'Os dados não são vendidos nem compartilhados para marketing. O serviço que recebe o formulário será informado aqui quando for configurado.' },
+    { title: 'Retenção', text: pending('Prazo de guarda das mensagens e forma de exclusão') },
+    { title: 'Cookies e analytics', text: 'Este site não usa cookies de rastreamento nem ferramentas de análise. As fontes são servidas pelo próprio site.' },
+    { title: 'Seus direitos', text: `Você pode pedir acesso, correção ou exclusão dos seus dados pelo e-mail ${professional.email}.` },
+    { title: 'Canais seguros', text: 'Evite enviar informações sensíveis por formulário, e-mail ou redes sociais. Detalhes clínicos devem ser tratados em canal apropriado, combinado com a profissional.' },
     { title: 'Emergências', text: emergencyNotice },
   ],
 } as const

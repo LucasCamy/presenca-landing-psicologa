@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: presenca-psicologa
+  namespace: landingpages
+  labels:
+    app: presenca-psicologa
+spec:
+  type: LoadBalancer
+  selector:
+    app: presenca-psicologa
+  ports:
+    - name: http
+      # 8212: próxima porta livre do catálogo (8210 casamento, 8211 vidraçaria).
+      # Cloudflare Tunnel → http://192.168.15.19:8212
+      port: 8212
+      targetPort: http
+      protocol: TCP

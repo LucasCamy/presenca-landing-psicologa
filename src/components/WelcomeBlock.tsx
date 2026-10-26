@@ -1,18 +1,36 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { welcome } from '../content/site'
+import { useMotionAllowed } from '../lib/useMotionAllowed'
+import { Lotus } from './Lotus'
 import { Reveal } from './Reveal'
+import { ScrollWords } from './ScrollWords'
 
+/** Acolhimento: a frase é lida no ritmo do scroll; a lótus grande desliza e gira devagar ao fundo. */
 export function WelcomeBlock() {
+  const ref = useRef<HTMLElement>(null)
+  const allowed = useMotionAllowed()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const lotusY = useTransform(scrollYProgress, [0, 1], [80, -80])
+  const lotusRotate = useTransform(scrollYProgress, [0, 1], [-10, 10])
+  const bloom = useTransform(scrollYProgress, [0.15, 0.5], [0, 1])
+
   return (
-    <section aria-label="Acolhimento" className="relative overflow-hidden bg-bg-alt">
-      <div aria-hidden className="pointer-events-none absolute -left-20 -top-24 hidden size-80 rounded-full bg-sage/35 md:block" />
-      <div aria-hidden className="pointer-events-none absolute -bottom-16 right-10 hidden size-44 rounded-full bg-blush/50 md:block" />
-      <Reveal className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 px-5 py-20 text-center md:py-32">
-        <svg aria-hidden width="64" height="12" viewBox="0 0 64 12" fill="none" className="text-clay">
-          <path d="M2 6c10-8 20 8 30 0s20 8 30 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-        <p className="font-serif text-[clamp(1.75rem,4vw,2.5rem)] leading-tight">{welcome.quote}</p>
-        <p className="max-w-xl text-lg text-ink-2 md:text-xl">{welcome.body}</p>
-      </Reveal>
+    <section ref={ref} aria-label="Acolhimento" className="relative overflow-hidden bg-bg-alt">
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 top-1/2 hidden w-[30rem] -translate-y-1/2 md:block"
+        style={allowed ? { y: lotusY, rotate: lotusRotate } : undefined}
+      >
+        <Lotus className="w-full text-peach-soft" strokeWidth={2} draw={false} />
+      </motion.div>
+      <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 px-5 py-24 text-center md:py-36">
+        <Lotus className="w-16 text-peach" draw={false} strokeWidth={1.4} bloom={bloom} />
+        <ScrollWords text={welcome.quote} className="font-display text-[clamp(1.6rem,3.6vw,2.4rem)] font-light leading-snug text-display" />
+        <Reveal>
+          <p className="max-w-xl text-lg text-ink-2 md:text-xl">{welcome.body}</p>
+        </Reveal>
+      </div>
     </section>
   )
 }
