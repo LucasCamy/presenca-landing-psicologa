@@ -10,6 +10,8 @@ metadata:
     keel.sh/policy: "force"
     keel.sh/trigger: "poll"
     keel.sh/pollSchedule: "@every 1m"
+    # Sem match-tag o Keel compara só tags e não detecta novo digest em :latest.
+    keel.sh/match-tag: "true"
 spec:
   replicas: 1
   revisionHistoryLimit: 3
