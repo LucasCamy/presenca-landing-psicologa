@@ -47,7 +47,7 @@ Segue o [homelab-docs](https://github.com/LucasCamy/homelab-docs) (`agent.md` e 
    curl -fsS http://192.168.15.19:8212/healthz
    ```
 4. Cloudflare Zero Trust → **Cloudlane Tunnel** → **Public Hostname**: `elainykaroliny.cloudlane.com.br` → `HTTP` → `192.168.15.19:8212`. ✅ feito
-5. Uptime Kuma: monitor HTTP(s) em `https://elainykaroliny.cloudlane.com.br/healthz`, intervalo 60 s. ⏳ pendente
+5. Uptime Kuma: monitor HTTP(s) "Elainy Karoliny Psicóloga" em `http://192.168.15.19:8212/healthz` (IP interno, como os demais apps do k3s), intervalo 60 s, no grupo **Aplicações & Web Services** da página de status. ✅ feito
 6. Registrar a porta 8212 em `04_CATALOGO_DE_APLICACOES_K3S.md` e o domínio em `09_MATRIZ_DNS_E_DOMINIOS.md` do homelab-docs. ✅ feito ([homelab-docs#2](https://github.com/LucasCamy/homelab-docs/pull/2))
 
 **Depois:** cada push na `main` que passar no lint/testes gera imagem nova, e o Keel faz o rollout em até 1 minuto, sem comando no servidor.
