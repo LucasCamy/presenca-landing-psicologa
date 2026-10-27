@@ -32,7 +32,8 @@ Segue o [homelab-docs](https://github.com/LucasCamy/homelab-docs) (`agent.md` e 
 | Imagem | `ghcr.io/lucascamy/presenca-landing-psicologa:latest` (+ `sha-<curto>`), `linux/amd64` |
 | Container | Nginx unprivileged, usuário 101, porta 8080, raiz somente leitura, `/healthz` |
 | Kubernetes | Deployment + Service `presenca-psicologa` no namespace `landingpages` |
-| Porta LoadBalancer | **8212** em `192.168.15.19` (próxima livre do catálogo) |
+| Porta LoadBalancer | **8212** em `192.168.15.19` (registrada no catálogo do homelab-docs) |
+| Domínio | https://elainykaroliny.cloudlane.com.br (Cloudflare Tunnel → `192.168.15.19:8212`) |
 | CI | `.github/workflows/deploy.yml`: lint, testes e build; depois publica no GHCR |
 
 **Primeira vez:**
@@ -45,9 +46,9 @@ Segue o [homelab-docs](https://github.com/LucasCamy/homelab-docs) (`agent.md` e 
    kubectl -n landingpages rollout status deploy/presenca-psicologa
    curl -fsS http://192.168.15.19:8212/healthz
    ```
-4. Cloudflare Zero Trust → **Cloudlane Tunnel** → **Public Hostname**: subdomínio escolhido (ex.: `psicologa.cloudlane.com.br`) → `HTTP` → `192.168.15.19:8212`.
-5. Uptime Kuma: monitor HTTP(s) em `https://<subdomínio>/healthz`, intervalo 60 s.
-6. Registrar a porta 8212 em `04_CATALOGO_DE_APLICACOES_K3S.md` do homelab-docs.
+4. Cloudflare Zero Trust → **Cloudlane Tunnel** → **Public Hostname**: `elainykaroliny.cloudlane.com.br` → `HTTP` → `192.168.15.19:8212`. ✅ feito
+5. Uptime Kuma: monitor HTTP(s) em `https://elainykaroliny.cloudlane.com.br/healthz`, intervalo 60 s. ⏳ pendente
+6. Registrar a porta 8212 em `04_CATALOGO_DE_APLICACOES_K3S.md` e o domínio em `09_MATRIZ_DNS_E_DOMINIOS.md` do homelab-docs. ✅ feito ([homelab-docs#2](https://github.com/LucasCamy/homelab-docs/pull/2))
 
 **Depois:** cada push na `main` que passar no lint/testes gera imagem nova, e o Keel faz o rollout em até 1 minuto, sem comando no servidor.
 
